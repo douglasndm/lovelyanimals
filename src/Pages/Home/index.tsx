@@ -1,10 +1,29 @@
 import React from 'react';
-import { View } from 'react-native';
 
-// import { Container } from './styles';
+import {
+    Container,
+    Header,
+    HeaderBackground,
+    TextContainer,
+    AppTitle,
+    AppDescription,
+} from './styles';
 
 const Home: React.FC = () => {
-    return <View />;
+    return (
+        <Container>
+            <Header>
+                <HeaderBackground>
+                    <TextContainer>
+                        <AppTitle>Lovely Animals</AppTitle>
+                        <AppDescription>
+                            A place to find cutie animals
+                        </AppDescription>
+                    </TextContainer>
+                </HeaderBackground>
+            </Header>
+        </Container>
+    );
 };
 
 export default Home;
