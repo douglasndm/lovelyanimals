@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import Flickr, { getImageUrl } from '../../services/flickr';
 
 import {
     Container,
@@ -9,51 +10,35 @@ import {
     SeeMoreText,
 } from './styles';
 
-const ListPictures: React.FC = () => {
-    const data = [
-        {
-            url: require('../../assets/Images/6tag-22065633-907853896847321313_22065633.jpg'),
-        },
-        {
-            url: require('../../assets/Images/6tag-22065633-907853896847321313_22065633.jpg'),
-        },
-        {
-            url: require('../../assets/Images/6tag-22065633-907853896847321313_22065633.jpg'),
-        },
-        {
-            url: require('../../assets/Images/6tag-22065633-907853896847321313_22065633.jpg'),
-        },
-        {
-            url: require('../../assets/Images/6tag-22065633-907853896847321313_22065633.jpg'),
-        },
-        {
-            url: require('../../assets/Images/6tag-22065633-907853896847321313_22065633.jpg'),
-        },
-        {
-            url: require('../../assets/Images/6tag-22065633-907853896847321313_22065633.jpg'),
-        },
-        {
-            url: require('../../assets/Images/6tag-22065633-907853896847321313_22065633.jpg'),
-        },
-        {
-            url: require('../../assets/Images/6tag-22065633-907853896847321313_22065633.jpg'),
-        },
-        {
-            url: require('../../assets/Images/6tag-22065633-907853896847321313_22065633.jpg'),
-        },
-        {
-            url: require('../../assets/Images/6tag-22065633-907853896847321313_22065633.jpg'),
-        },
-        {
-            url: require('../../assets/Images/6tag-22065633-907853896847321313_22065633.jpg'),
-        },
-        {
-            url: require('../../assets/Images/6tag-22065633-907853896847321313_22065633.jpg'),
-        },
-    ];
+interface RenderItemProps {
+    item: FlickrImage;
+}
 
-    const renderAnimalImage = useCallback(({ item }) => {
-        return <AnimalImage source={item.url} />;
+const ListPictures: React.FC = () => {
+    const [animalsPhotos, setAnimalsPhotos] = useState<Array<FlickrImage>>([]);
+
+    const getData = useCallback(async () => {
+        const response = await Flickr.get('/', {
+            params: {
+                method: 'flickr.photos.search',
+                tags: 'dogs',
+                per_page: 10,
+            },
+        });
+
+        const photosWithUrls = response.data.photos.photo.map(picture =>
+            getImageUrl(picture),
+        );
+
+        setAnimalsPhotos(photosWithUrls);
+    }, []);
+
+    useEffect(() => {
+        getData();
+    }, [getData]);
+
+    const renderAnimalImage = useCallback(({ item }: RenderItemProps) => {
+        return <AnimalImage source={{ uri: item.image_urls.medium }} />;
     }, []);
 
     return (
@@ -61,7 +46,7 @@ const ListPictures: React.FC = () => {
             <ListTitle>cuties</ListTitle>
 
             <List
-                data={data}
+                data={animalsPhotos}
                 keyExtractor={(item, index) => String(index)}
                 renderItem={renderAnimalImage}
                 horizontal

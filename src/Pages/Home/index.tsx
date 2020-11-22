@@ -29,11 +29,6 @@ const Home: React.FC = () => {
             </Header>
 
             <ListPictures />
-            <ListPictures />
-            <ListPictures />
-            <ListPictures />
-            <ListPictures />
-            <ListPictures />
 
             <DonateContainer>
                 <DonateTitle>Ajude com doações</DonateTitle>
