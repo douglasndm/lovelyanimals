@@ -17,7 +17,13 @@ interface RenderItemProps {
     item: FlickrImage;
 }
 
-const ListPictures: React.FC = () => {
+interface Props {
+    title: string;
+    searchFor: string;
+    limit?: number;
+}
+
+const ListPictures: React.FC<Props> = ({ title, searchFor, limit }: Props) => {
     const [isLoading, setIsLoading] = useState(false);
     const [animalsPhotos, setAnimalsPhotos] = useState<Array<FlickrImage>>([]);
 
@@ -26,18 +32,18 @@ const ListPictures: React.FC = () => {
         const response = await Flickr.get('/', {
             params: {
                 method: 'flickr.photos.search',
-                tags: 'cutie dog',
-                per_page: 10,
+                tags: searchFor,
+                per_page: limit || 15,
             },
         });
 
-        const photosWithUrls = response.data.photos.photo.map(picture =>
-            getImageUrl(picture),
+        const photosWithUrls = response.data.photos.photo.map(
+            (picture: FlickrResultFile) => getImageUrl(picture),
         );
 
         setAnimalsPhotos(photosWithUrls);
         setIsLoading(false);
-    }, []);
+    }, [searchFor, limit]);
 
     useEffect(() => {
         getData();
@@ -51,7 +57,7 @@ const ListPictures: React.FC = () => {
         <Loading />
     ) : (
         <Container>
-            <ListTitle>cuties</ListTitle>
+            <ListTitle>{title}</ListTitle>
 
             <List
                 data={animalsPhotos}

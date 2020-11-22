@@ -28,15 +28,18 @@ const Home: React.FC = () => {
                 </HeaderBackground>
             </Header>
 
-            <ListPictures />
+            <ListPictures title="cuties" searchFor="cute dog" limit={20} />
+            <ListPictures title="happy" searchFor="happy dog" limit={20} />
+            <ListPictures title="funny" searchFor="funny dog" limit={20} />
 
             <DonateContainer>
                 <DonateTitle>Ajude com doações</DonateTitle>
-                <DonateItem />
-                <DonateItem />
-                <DonateItem />
-                <DonateItem />
-                <DonateItem />
+                <DonateItem
+                    name="Casa dos anjos"
+                    address="Macaé-RJ"
+                    description="Abrigo para animais resgatados a procura de um lar responsável."
+                    navigateToUrl="http://petdote.com.br/"
+                />
             </DonateContainer>
         </Container>
     );

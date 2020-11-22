@@ -38,4 +38,5 @@ export const DonateContainer = styled.View`
 export const DonateTitle = styled.Text`
     font-family: 'Roboto-Regular';
     font-size: 24px;
+    margin-bottom: 10px;
 `;

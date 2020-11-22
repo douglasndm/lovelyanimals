@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { Linking } from 'react-native';
 
 import {
     Container,
@@ -7,16 +8,28 @@ import {
     InstitutionDescription,
 } from './styles';
 
-const DonateItem: React.FC = () => {
+interface Props {
+    name: string;
+    address: string;
+    description: string;
+    navigateToUrl: string;
+}
+
+const DonateItem: React.FC<Props> = ({
+    name,
+    address,
+    description,
+    navigateToUrl,
+}: Props) => {
+    const handleOpenLink = useCallback(() => {
+        Linking.openURL(navigateToUrl);
+    }, [navigateToUrl]);
+
     return (
-        <Container>
-            <InstitutionTitle>Casa dos anjos</InstitutionTitle>
-            <InstitutionAddress>
-                Rua ABC, número 123, bairro, cidade, estado
-            </InstitutionAddress>
-            <InstitutionDescription>
-                ASDPOK ASPODK ASPDOK ASPODK ASPDOK ASPODK ASPODK ASDPK
-            </InstitutionDescription>
+        <Container onPress={handleOpenLink}>
+            <InstitutionTitle>{name}</InstitutionTitle>
+            <InstitutionAddress>{address}</InstitutionAddress>
+            <InstitutionDescription>{description}</InstitutionDescription>
         </Container>
     );
 };
