@@ -1,5 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
+
 import Flickr, { getImageUrl } from '../../services/flickr';
+
+import Loading from '../Loading';
 
 import {
     Container,
@@ -15,13 +18,15 @@ interface RenderItemProps {
 }
 
 const ListPictures: React.FC = () => {
+    const [isLoading, setIsLoading] = useState(false);
     const [animalsPhotos, setAnimalsPhotos] = useState<Array<FlickrImage>>([]);
 
     const getData = useCallback(async () => {
+        setIsLoading(true);
         const response = await Flickr.get('/', {
             params: {
                 method: 'flickr.photos.search',
-                tags: 'dogs',
+                tags: 'cutie dog',
                 per_page: 10,
             },
         });
@@ -31,6 +36,7 @@ const ListPictures: React.FC = () => {
         );
 
         setAnimalsPhotos(photosWithUrls);
+        setIsLoading(false);
     }, []);
 
     useEffect(() => {
@@ -41,7 +47,9 @@ const ListPictures: React.FC = () => {
         return <AnimalImage source={{ uri: item.image_urls.medium }} />;
     }, []);
 
-    return (
+    return isLoading ? (
+        <Loading />
+    ) : (
         <Container>
             <ListTitle>cuties</ListTitle>
 
