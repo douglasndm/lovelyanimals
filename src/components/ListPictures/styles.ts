@@ -14,6 +14,8 @@ export const List = styled.FlatList`
     margin-top: 10px;
 `;
 
+export const PhotoContainer = styled.TouchableOpacity``;
+
 export const AnimalImage = styled.Image`
     width: 125px;
     height: 125px;

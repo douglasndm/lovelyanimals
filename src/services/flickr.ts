@@ -4,6 +4,10 @@ import EnvConfig from 'react-native-config';
 export function getImageUrl(flickrFile: FlickrResultFile): FlickrImage {
     const image: FlickrImage = {
         title: flickrFile.title,
+
+        photo_id: flickrFile.id,
+        secret: flickrFile.secret,
+
         image_urls: {
             small: `https://live.staticflickr.com/${flickrFile.server}/${flickrFile.id}_${flickrFile.secret}_w.jpg`,
             medium: `https://live.staticflickr.com/${flickrFile.server}/${flickrFile.id}_${flickrFile.secret}_c.jpg`,

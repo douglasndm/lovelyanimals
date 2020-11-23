@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import Flickr, { getImageUrl } from '../../services/flickr';
 
@@ -8,6 +9,7 @@ import {
     Container,
     ListTitle,
     List,
+    PhotoContainer,
     AnimalImage,
     SeeMoreButton,
     SeeMoreText,
@@ -17,6 +19,11 @@ interface RenderItemProps {
     item: FlickrImage;
 }
 
+interface PhotoClickProps {
+    photo_id: string;
+    secret: string;
+}
+
 interface Props {
     title: string;
     searchFor: string;
@@ -24,6 +31,8 @@ interface Props {
 }
 
 const ListPictures: React.FC<Props> = ({ title, searchFor, limit }: Props) => {
+    const { navigate } = useNavigation();
+
     const [isLoading, setIsLoading] = useState(false);
     const [animalsPhotos, setAnimalsPhotos] = useState<Array<FlickrImage>>([]);
 
@@ -49,8 +58,24 @@ const ListPictures: React.FC<Props> = ({ title, searchFor, limit }: Props) => {
         getData();
     }, [getData]);
 
+    const handlePhotoClick = useCallback(
+        ({ photo_id, secret }: PhotoClickProps) => {
+            navigate('PhotoView', {
+                photo_id,
+                secret,
+            });
+        },
+        [navigate],
+    );
+
     const renderAnimalImage = useCallback(({ item }: RenderItemProps) => {
-        return <AnimalImage source={{ uri: item.image_urls.medium }} />;
+        return (
+            <PhotoContainer
+                onPress={() => handlePhotoClick({ photo_id: '', secret: '' })}
+            >
+                <AnimalImage source={{ uri: item.image_urls.medium }} />
+            </PhotoContainer>
+        );
     }, []);
 
     return isLoading ? (
