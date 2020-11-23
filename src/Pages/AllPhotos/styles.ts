@@ -5,7 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 export const Container = styled.View``;
 
 export const Header = styled.View`
-    margin: 10px 15px;
+    margin: 10px 0;
 
     flex-direction: row;
     align-items: center;
@@ -22,4 +22,14 @@ export const PageTitle = styled.Text`
     margin-left: 10px;
     font-size: 30px;
     font-weight: bold;
+`;
+
+export const List = styled.FlatList`
+    margin: 0 10px;
+`;
+
+export const Photo = styled.Image`
+    height: 125px;
+    width: 125px;
+    margin: 5px;
 `;
