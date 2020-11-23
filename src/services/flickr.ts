@@ -11,7 +11,7 @@ export function getImageUrl(flickrFile: FlickrResultFile): FlickrImage {
         image_urls: {
             small: `https://live.staticflickr.com/${flickrFile.server}/${flickrFile.id}_${flickrFile.secret}_w.jpg`,
             medium: `https://live.staticflickr.com/${flickrFile.server}/${flickrFile.id}_${flickrFile.secret}_c.jpg`,
-            large: `https://live.staticflickr.com/${flickrFile.server}/${flickrFile.id}_${flickrFile.secret}_k.jpg`,
+            large: `https://live.staticflickr.com/${flickrFile.server}/${flickrFile.id}_${flickrFile.secret}_b.jpg`,
         },
     };
 

@@ -71,7 +71,12 @@ const ListPictures: React.FC<Props> = ({ title, searchFor, limit }: Props) => {
     const renderAnimalImage = useCallback(({ item }: RenderItemProps) => {
         return (
             <PhotoContainer
-                onPress={() => handlePhotoClick({ photo_id: '', secret: '' })}
+                onPress={() =>
+                    handlePhotoClick({
+                        photo_id: item.photo_id,
+                        secret: item.secret,
+                    })
+                }
             >
                 <AnimalImage source={{ uri: item.image_urls.medium }} />
             </PhotoContainer>
