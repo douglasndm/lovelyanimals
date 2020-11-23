@@ -11,6 +11,7 @@ import {
     BackButtonImage,
     PageTitle,
     List,
+    PhotoContainer,
     Photo,
 } from './styles';
 
@@ -18,12 +19,17 @@ interface Props {
     searchFor: string;
 }
 
+interface handlePhotoClickProps {
+    photo_id: string;
+    secret: string;
+}
+
 interface renderItemProps {
     item: FlickrImage;
 }
 
 const AllPhotos: React.FC = () => {
-    const { goBack } = useNavigation();
+    const { goBack, navigate } = useNavigation();
 
     const Route = useRoute();
     const routeParams = Route.params as Props;
@@ -36,7 +42,7 @@ const AllPhotos: React.FC = () => {
             params: {
                 method: 'flickr.photos.search',
                 tags: routeParams.searchFor,
-                per_page: 25,
+                per_page: 50,
                 page: 1,
             },
         });
@@ -50,27 +56,31 @@ const AllPhotos: React.FC = () => {
         loadData();
     }, [loadData]);
 
-    useEffect(() => {
-        Flickr.get('/', {
-            params: {
-                method: 'flickr.photos.search',
-                tags: routeParams.searchFor,
-                per_page: 25,
-                page,
-            },
-        }).then(response => {
-            const data = response.data.photos.photo.map(p => getImageUrl(p));
-
-            setPhotos(prevState => prevState);
-        });
-    }, [page, routeParams.searchFor]);
+    const handlePhotoClick = useCallback(
+        ({ photo_id, secret }: handlePhotoClickProps) => {
+            navigate('PhotoView', {
+                photo_id,
+                secret,
+            });
+        },
+        [navigate],
+    );
 
     const renderItem = useCallback((item: renderItemProps) => {
         return (
-            <Photo
-                key={item.item.photo_id}
-                source={{ uri: item.item.image_urls.medium }}
-            />
+            <PhotoContainer
+                onPress={() =>
+                    handlePhotoClick({
+                        photo_id: item.item.photo_id,
+                        secret: item.item.secret,
+                    })
+                }
+            >
+                <Photo
+                    key={item.item.photo_id}
+                    source={{ uri: item.item.image_urls.medium }}
+                />
+            </PhotoContainer>
         );
     }, []);
 
