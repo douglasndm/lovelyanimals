@@ -68,20 +68,29 @@ const ListPictures: React.FC<Props> = ({ title, searchFor, limit }: Props) => {
         [navigate],
     );
 
-    const renderAnimalImage = useCallback(({ item }: RenderItemProps) => {
-        return (
-            <PhotoContainer
-                onPress={() =>
-                    handlePhotoClick({
-                        photo_id: item.photo_id,
-                        secret: item.secret,
-                    })
-                }
-            >
-                <AnimalImage source={{ uri: item.image_urls.medium }} />
-            </PhotoContainer>
-        );
-    }, []);
+    const renderAnimalImage = useCallback(
+        ({ item }: RenderItemProps) => {
+            return (
+                <PhotoContainer
+                    onPress={() =>
+                        handlePhotoClick({
+                            photo_id: item.photo_id,
+                            secret: item.secret,
+                        })
+                    }
+                >
+                    <AnimalImage source={{ uri: item.image_urls.medium }} />
+                </PhotoContainer>
+            );
+        },
+        [handlePhotoClick],
+    );
+
+    const handleSeeAllPhotosClick = useCallback(() => {
+        navigate('AllPhotos', {
+            searchFor,
+        });
+    }, [navigate, searchFor]);
 
     return isLoading ? (
         <Loading />
@@ -96,8 +105,8 @@ const ListPictures: React.FC<Props> = ({ title, searchFor, limit }: Props) => {
                 horizontal
             />
 
-            <SeeMoreButton>
-                <SeeMoreText>see all</SeeMoreText>
+            <SeeMoreButton onPress={handleSeeAllPhotosClick}>
+                <SeeMoreText>ver todas</SeeMoreText>
             </SeeMoreButton>
         </Container>
     );

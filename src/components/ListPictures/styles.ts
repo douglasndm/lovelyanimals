@@ -24,12 +24,13 @@ export const AnimalImage = styled.Image`
 `;
 
 export const SeeMoreButton = styled(RectButton)`
+    margin-top: 5px;
     align-self: flex-end;
-    padding: 7px;
+    padding: 5px;
 `;
 
 export const SeeMoreText = styled.Text`
     font-family: 'Roboto-Regular';
-    color: #a1d034;
+    color: ${props => props.theme.colors.accent};
     font-size: 19px; ;
 `;

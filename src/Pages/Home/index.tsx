@@ -22,21 +22,21 @@ const Home: React.FC = () => {
                     <TextContainer>
                         <AppTitle>Lovely Animals</AppTitle>
                         <AppDescription>
-                            A place to find cutie animals
+                            um lugar para encontrar animais fofinhos
                         </AppDescription>
                     </TextContainer>
                 </HeaderBackground>
             </Header>
 
-            <ListPictures title="cuties" searchFor="cute dog" limit={20} />
-            <ListPictures title="happy" searchFor="happy dog" limit={20} />
-            <ListPictures title="funny" searchFor="funny dog" limit={20} />
+            <ListPictures title="fofos" searchFor="cute dog" limit={20} />
+            <ListPictures title="felizes" searchFor="happy dog" limit={20} />
+            <ListPictures title="engraçados" searchFor="funny dog" limit={20} />
 
             <DonateContainer>
                 <DonateTitle>Ajude com doações</DonateTitle>
                 <DonateItem
                     name="Casa dos anjos"
-                    address="Macaé-RJ"
+                    address="Macaé - RJ"
                     description="Abrigo para animais resgatados a procura de um lar responsável."
                     navigateToUrl="http://petdote.com.br/"
                 />
