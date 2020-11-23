@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Linking } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
+import Header from '../../components/Header';
 import Loading from '../../components/Loading';
 import flickr, { getImageUrl } from '../../services/flickr';
 
@@ -22,6 +23,8 @@ interface Props {
 }
 
 const PhotoView: React.FC = () => {
+    const { goBack } = useNavigation();
+
     const Route = useRoute();
     const routeParams = Route.params as Props;
 
@@ -76,6 +79,7 @@ const PhotoView: React.FC = () => {
         <Loading />
     ) : (
         <Container>
+            <Header pageTitle="foto" backButtonOnPress={goBack} />
             {image && (
                 <FullSizePhoto source={{ uri: image.image_urls.large }} />
             )}

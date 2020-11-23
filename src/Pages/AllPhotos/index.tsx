@@ -1,19 +1,11 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
-import { Alert } from 'react-native';
 import Flickr, { getImageUrl } from '../../services/flickr';
 
-import {
-    Container,
-    Header,
-    BackButton,
-    BackButtonImage,
-    PageTitle,
-    List,
-    PhotoContainer,
-    Photo,
-} from './styles';
+import Header from '../../components/Header';
+
+import { Container, List, PhotoContainer, Photo } from './styles';
 
 interface Props {
     searchFor: string;
@@ -89,13 +81,10 @@ const AllPhotos: React.FC = () => {
             <List
                 data={photos}
                 ListHeaderComponent={() => (
-                    <Header>
-                        <BackButton onPress={goBack}>
-                            <BackButtonImage />
-                        </BackButton>
-
-                        <PageTitle>Todas as fotos</PageTitle>
-                    </Header>
+                    <Header
+                        pageTitle={routeParams.searchFor}
+                        backButtonOnPress={goBack}
+                    />
                 )}
                 numColumns={3}
                 keyExtractor={(item, index) => String(index)}
