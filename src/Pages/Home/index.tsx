@@ -6,8 +6,8 @@ import DonateItem from '../../components/DonateItem';
 import {
     Container,
     Header,
-    HeaderBackground,
-    TextContainer,
+    PawImage,
+    LogoContainer,
     AppTitle,
     AppDescription,
     DonateContainer,
@@ -18,14 +18,13 @@ const Home: React.FC = () => {
     return (
         <Container>
             <Header>
-                <HeaderBackground>
-                    <TextContainer>
-                        <AppTitle>Lovely Animals</AppTitle>
-                        <AppDescription>
-                            um lugar para encontrar animais fofinhos
-                        </AppDescription>
-                    </TextContainer>
-                </HeaderBackground>
+                <LogoContainer>
+                    <PawImage />
+                    <AppTitle>Lovely Animals</AppTitle>
+                </LogoContainer>
+                <AppDescription>
+                    Um lugar para encontrar animais fofinhos
+                </AppDescription>
             </Header>
 
             <ListPictures title="fofos" searchFor="cute dog" limit={20} />

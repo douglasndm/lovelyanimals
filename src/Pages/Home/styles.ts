@@ -1,25 +1,32 @@
 import styled from 'styled-components/native';
 
-import backgroundImage from '../../assets/Images/headerBackground.jpg';
+import paw from '../../assets/Images/paw.png';
 
 export const Container = styled.ScrollView``;
 
-export const Header = styled.View``;
-
-export const HeaderBackground = styled.ImageBackground.attrs({
-    source: backgroundImage,
-    resizeMode: 'cover',
-})`
-    height: 220px;
+export const Header = styled.View`
+    background: ${props => props.theme.colors.accent};
+    padding: 10px;
+    margin: 15px 0;
+    align-self: flex-start;
+    border-top-right-radius: 17px;
+    border-bottom-right-radius: 17px;
 `;
 
-export const TextContainer = styled.View`
-    bottom: 0;
-    position: absolute;
-    margin: 0 0 10px 10px;
+export const LogoContainer = styled.View`
+    flex-direction: row;
+`;
+
+export const PawImage = styled.Image.attrs({
+    source: paw,
+})`
+    height: 45px;
+    width: 45px;
+    margin: 5px 10px 5px 0;
 `;
 
 export const AppTitle = styled.Text`
+    align-self: center;
     font-family: 'Sacramento-Regular';
     color: #fff;
     font-size: 49px;
